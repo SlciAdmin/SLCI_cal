@@ -3,152 +3,176 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>SLCI New Tax Regime Calculator — FY 2025-26 (Inputs Added for Interest)</title>
+<title>SLCI New Tax Regime Calculator — FY 2025-26</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-  body{font-family:'Inter',sans-serif;background:#f7f9fb}
-  .card{transition:.18s;}.card:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.06)}
-  table td, table th { border-bottom: 1px solid #e5e7eb; }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f0f4f8; /* Lighter, modern background */
+  }
+  .card {
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  table td, table th {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 8px; /* Slightly more padding for table cells */
+  }
+  /* Custom style for input focus */
+  input:focus {
+    border-color: #4f46e5 !important;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+  }
 </style>
 </head>
 <body class="p-4 sm:p-8">
 
-<div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl p-6 sm:p-10 border border-indigo-100">
+<div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl p-6 sm:p-10 border border-gray-200">
 
-  <header class="mb-6 border-b pb-4">
-    <h1 class="text-2xl sm:text-3xl font-extrabold text-indigo-800"> SLCI New Tax Regime Calculator — FY 2025-26 </h1>
-    <p class="text-sm text-gray-600 mt-1">Standard Deduction ₹75,000 • Rebate u/s 87A up to ₹60,000 (Taxable Income up to ₹12,00,000 effective tax-free)</p>
-  </header>
+  <header class="mb-8 border-b border-indigo-100 pb-5">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight"> New Tax Regime Calculator </h1>
+    <p class="text-base text-indigo-600 font-semibold mt-1">FY 2025-26 | Standard Deduction ₹75,000 | Rebate u/s 87A up to ₹60,000</p>
+  </header>
 
-  <section id="input-form" class="mb-6">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Annual Salary (Gross, ₹)</label>
-        <input id="salary" type="number" value="1300000" min="0" class="w-full px-3 py-2 border rounded-lg">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Other Taxable Income (₹)</label>
-        <input id="other_income" type="number" value="0" min="0" class="w-full px-3 py-2 border rounded-lg">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Months Worked (1–12)</label>
-        <input id="months_worked" type="number" value="12" min="1" max="12" class="w-full px-3 py-2 border rounded-lg">
-      </div>
-    </div>
+  <section id="input-form" class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+      <!-- Input Group 1 -->
+      <div>
+        <label for="salary" class="block text-sm font-medium text-gray-700 mb-1">Annual Salary (Gross, ₹)</label>
+        <input id="salary" type="number" value="1300000" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-xl transition duration-150 ease-in-out">
+      </div>
+      <!-- Input Group 2 -->
+      <div>
+        <label for="other_income" class="block text-sm font-medium text-gray-700 mb-1">Other Taxable Income (₹)</label>
+        <input id="other_income" type="number" value="0" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-xl transition duration-150 ease-in-out">
+      </div>
+      <!-- Input Group 3 -->
+      <div>
+        <label for="months_worked" class="block text-sm font-medium text-gray-700 mb-1">Months Worked (1–12)</label>
+        <input id="months_worked" type="number" value="12" min="1" max="12" class="w-full px-4 py-2 border border-gray-300 rounded-xl transition duration-150 ease-in-out">
+      </div>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Standard Deduction (Max ₹75,000)</label>
-        <input id="std_deduction" type="number" value="75000" min="0" class="w-full px-3 py-2 border rounded-lg">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">TDS Already Deducted (₹)</label>
-        <input id="tds_deducted" type="number" value="0" min="0" class="w-full px-3 py-2 border rounded-lg">
-      </div>
-              <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Date of Filing (YYYY-MM-DD)</label>
-        <input id="filing_date" type="date" class="w-full px-3 py-2 border rounded-lg" value="2025-07-31">
-      </div>
-              <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Advance Tax Paid (₹)</label>
-        <input id="advance_tax" type="number" value="0" min="0" class="w-full px-3 py-2 border rounded-lg">
-      </div>
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <!-- Input Group 4 -->
+      <div>
+        <label for="std_deduction" class="block text-sm font-medium text-gray-700 mb-1">Standard Deduction (Max ₹75,000)</label>
+        <input id="std_deduction" type="number" value="75000" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-xl transition duration-150 ease-in-out">
+      </div>
+      <!-- Input Group 5 -->
+      <div>
+        <label for="tds_deducted" class="block text-sm font-medium text-gray-700 mb-1">TDS Already Deducted (₹)</label>
+        <input id="tds_deducted" type="number" value="0" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-xl transition duration-150 ease-in-out">
+      </div>
+    </div>
 
-    <div class="text-center">
-      <button onclick="calculateTax()" class="px-8 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700">Calculate Tax</button>
-        <div class="mt-3 text-red-600 font-medium" id="error_message" style="display:none;"></div>
-    </div>
-  </section>
+    <div class="text-center">
+      <button onclick="calculateTax()" class="px-10 py-3 bg-indigo-600 text-white rounded-full font-bold text-lg shadow-xl shadow-indigo-300/50 hover:bg-indigo-700 transform hover:scale-[1.02] transition duration-300 ease-in-out">
+        Calculate Tax
+      </button>
+      <div class="mt-4 text-red-600 font-medium" id="error_message" style="display:none;"></div>
+    </div>
+  </section>
 
-  <section id="results-area" class="pt-6 border-t hidden">
-    <h2 class="text-lg font-bold text-gray-800 mb-4">Calculation Breakdown</h2>
+  <section id="results-area" class="pt-8 border-t border-gray-100 hidden">
+    <h2 class="text-2xl font-bold text-gray-800 mb-5 border-b pb-2">Calculation Breakdown</h2>
 
-    <div id="results-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-      <div class="card bg-indigo-50 p-4 rounded-xl border-l-4 border-indigo-500">
-        <p class="text-xs text-indigo-600">Pro-rated Gross Income</p>
-        <p id="resultGrossIncome" class="text-xl font-bold text-indigo-900">₹ 0.00</p>
-      </div>
-      <div class="card bg-purple-50 p-4 rounded-xl border-l-4 border-purple-500">
-        <p class="text-xs text-purple-600">Final Taxable Income</p>
-        <p id="resultTaxableIncome" class="text-xl font-bold text-purple-900">₹ 0.00</p>
-      </div>
-      <div class="card bg-yellow-50 p-4 rounded-xl border-l-4 border-yellow-500">
-        <p class="text-xs text-yellow-600">Tax before Surcharge & Cess</p>
-        <p id="resultTaxBeforeSurcharge" class="text-xl font-bold text-yellow-900">₹ 0.00</p>
-      </div>
-      <div class="card bg-pink-50 p-4 rounded-xl border-l-4 border-pink-500">
-        <p class="text-xs text-pink-600">Total Tax (Surcharge + Cess)</p>
-        <p id="resultTotalPayable" class="text-xl font-bold text-pink-900">₹ 0.00</p>
-      </div>
-    </div>
+    <!-- Key Metric Cards -->
+    <div id="results-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="card bg-indigo-50 p-5 rounded-xl border-l-4 border-indigo-500 shadow-md">
+        <p class="text-sm text-indigo-700 font-medium">Pro-rated Gross Income</p>
+        <p id="resultGrossIncome" class="text-2xl font-extrabold text-indigo-900 mt-1">₹ 0</p>
+      </div>
+      <div class="card bg-purple-50 p-5 rounded-xl border-l-4 border-purple-500 shadow-md">
+        <p class="text-sm text-purple-700 font-medium">Final Taxable Income</p>
+        <p id="resultTaxableIncome" class="text-2xl font-extrabold text-purple-900 mt-1">₹ 0</p>
+      </div>
+      <div class="card bg-yellow-50 p-5 rounded-xl border-l-4 border-yellow-500 shadow-md">
+        <p class="text-sm text-yellow-700 font-medium">Tax before Surcharge & Cess</p>
+        <p id="resultTaxBeforeSurcharge" class="text-2xl font-extrabold text-yellow-900 mt-1">₹ 0</p>
+      </div>
+      <div class="card bg-pink-50 p-5 rounded-xl border-l-4 border-pink-500 shadow-md">
+        <p class="text-sm text-pink-700 font-medium">Total Tax Payable</p>
+        <p id="resultTotalPayable" class="text-2xl font-extrabold text-pink-900 mt-1">₹ 0</p>
+      </div>
+    </div>
 
-    <div id="slabBreakdown" class="mb-6 overflow-x-auto">
-      <h3 class="text-md font-semibold mb-2">Slab-wise Tax Breakdown (Based on New Regime Slabs FY 2025-26)</h3>
-      <table class="min-w-full text-sm">
-        <thead class="bg-gray-100">
-          <tr>
-            <th class="p-2 text-left">Slab Range (₹)</th>
-            <th class="p-2 text-center">Rate</th>
-            <th class="p-2 text-right">Taxable Amount</th>
-            <th class="p-2 text-right">Tax</th>
-          </tr>
-        </thead>
-        <tbody id="slabTableBody"></tbody>
-      </table>
-    </div>
+    <!-- Slab Breakdown Table -->
+    <div id="slabBreakdown" class="mb-8 overflow-x-auto border border-gray-200 rounded-xl shadow-inner">
+      <h3 class="text-lg font-semibold bg-gray-50 p-4 rounded-t-xl border-b text-gray-700">Slab-wise Tax Breakdown (New Regime Slabs)</h3>
+      <table class="min-w-full text-sm">
+        <thead class="bg-gray-100 border-b-2 border-gray-200">
+          <tr>
+            <th class="p-3 text-left font-bold text-gray-600">Slab Range (₹)</th>
+            <th class="p-3 text-center font-bold text-gray-600">Rate</th>
+            <th class="p-3 text-right font-bold text-gray-600">Taxable Amount</th>
+            <th class="p-3 text-right font-bold text-gray-600">Tax</th>
+          </tr>
+        </thead>
+        <tbody id="slabTableBody"></tbody>
+      </table>
+    </div>
 
-    <div class="p-4 rounded-xl border-2 border-dashed border-gray-300">
-      <p class="text-sm font-medium text-blue-700">Net Payable / Refund (Tax − TDS)</p>
-      <p id="resultNet" class="text-3xl font-extrabold text-blue-800 mt-1">₹ 0.00</p>
-      <p id="netStatus" class="text-lg text-blue-600 mt-1 font-semibold"></p>
+    <!-- Final Net Result and Details -->
+    <div class="p-6 rounded-xl border-4 border-blue-200 bg-blue-50 shadow-lg">
+      <p class="text-base font-medium text-blue-700">Net Tax Due / Refund (Tax Payable − TDS)</p>
+      <p id="resultNet" class="text-4xl font-extrabold text-blue-800 mt-2">₹ 0</p>
+      <p id="netStatus" class="text-xl text-blue-600 mt-2 font-semibold"></p>
 
-      <div class="mt-3 text-sm text-gray-700">
-        <p><strong>Tax before Rebate:</strong> <span id="detailBaseTax">₹ 0.00</span></p>
-        <p><strong>Rebate (Sec 87A):</strong> <span id="detailRebate">Not Applied</span></p>
-        <p><strong>Tax after Rebate:</strong> <span id="detailTaxAfterRebate">₹ 0.00</span></p>
-        <p><strong>Surcharge Rate:</strong> <span id="detailSurchargeRate">0%</span></p>
-        <p><strong>Surcharge Amount:</strong> <span id="detailSurcharge">₹ 0.00</span></p>
-        <p><strong>Health & Education Cess (4%):</strong> <span id="detailCess">₹ 0.00</span></p>
-      </div>
-    </div>
-    
-    <div class="mt-4 p-3 bg-red-100 border border-red-300 rounded-lg text-sm text-red-800">
-        ⚠️ **Disclaimer:** Interest u/s 234A/B/C and Fees u/s 234F calculations **Advance Tax** aur **Filing Date** par nirbhar karte hain. Yeh calculator **abhi unhe shamil nahin karta hai** aur yeh values ₹0 set ki gayi hain.
+      <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-gray-700">
+        <p><strong>Tax before Rebate:</strong> <span id="detailBaseTax" class="font-medium text-gray-900">₹ 0</span></p>
+        <p><strong>Rebate (Sec 87A):</strong> <span id="detailRebate" class="font-medium text-green-700">Not Applied</span></p>
+        <p><strong>Tax after Rebate:</strong> <span id="detailTaxAfterRebate" class="font-medium text-gray-900">₹ 0</span></p>
+        <p><strong>Surcharge Rate:</strong> <span id="detailSurchargeRate" class="font-medium text-gray-900">0%</span></p>
+        <p><strong>Surcharge Amount:</strong> <span id="detailSurcharge" class="font-medium text-gray-900">₹ 0</span></p>
+        <p><strong>Health & Education Cess (4%):</strong> <span id="detailCess" class="font-medium text-gray-900">₹ 0</span></p>
+      </div>
     </div>
     
-  </section>
+    <!-- Disclaimer -->
+    <div class="mt-6 p-4 bg-red-50 border border-red-300 rounded-lg text-sm text-red-800 shadow-inner">
+      <p class="font-bold mb-1">⚠️ Disclaimer / कानूनी सूचना:</p>
+      <p>Interest u/s 234A/B/C and Fees u/s 234F calculations **advance tax payment** aur **filing dates** par nirbhar karte hain. Yeh calculator unhe shamil **nahin** karta hai aur yeh values ₹0 set ki gayi hain.</p>
+    </div>
+    
+  </section>
 
-  <footer class="mt-6 text-xs text-gray-400 text-center">Disclaimer: Estimates only. Use official portal for filing.</footer>
+  <footer class="mt-8 text-xs text-gray-400 text-center border-t pt-4">Disclaimer: Estimates only. Use official portal for filing.</footer>
 </div>
 
 <script>
 /*
   FINAL FIXED LOGIC: Tax Slabs and Standard Deduction (₹75,000) are kept as per user's system.
   Rebate u/s 87A logic is corrected to include Marginal Relief to match the official ₹26,000 output.
-  NEW INPUTS ADDED: filing_date and advance_tax.
 */
 
 const MAX_STD_DEDUCTION_ANNUAL = 75000;
+// Rebate is effective up to Taxable Income ₹12,00,000
 const REBATE_LIMIT = 1200000; 
-const MAX_REBATE = 60000; 
+const MAX_REBATE = 60000; // Max Rebate amount
 const CESS_RATE = 0.04;
 
+// Surcharge bands (standard)
 const SURCHARGE_BANDS = [
   { threshold: 5000000, rate: 0.10 },
   { threshold: 10000000, rate: 0.15 },
   { threshold: 20000000, rate: 0.25 }
 ];
 
+// Tax slabs used by your system 
 const SLABS = [
-  { upto: 400000, rate: 0.00 },
-  { upto: 800000, rate: 0.05 },
-  { upto: 1200000, rate: 0.10 },
-  { upto: 1600000, rate: 0.15 },
-  { upto: 2000000, rate: 0.20 },
-  { upto: 2400000, rate: 0.25 },
-  { upto: Infinity, rate: 0.30 }
+  { upto: 400000, rate: 0.00 }, // Up to 4 Lakhs - NIL
+  { upto: 800000, rate: 0.05 }, // 4 Lakhs to 8 Lakhs - 5%
+  { upto: 1200000, rate: 0.10 },// 8 Lakhs to 12 Lakhs - 10%
+  { upto: 1600000, rate: 0.15 },// 12 Lakhs to 16 Lakhs - 15%
+  { upto: 2000000, rate: 0.20 },// 16 Lakhs to 20 Lakhs - 20%
+  { upto: 2400000, rate: 0.25 },// 20 Lakhs to 24 Lakhs - 25%
+  { upto: Infinity, rate: 0.30 } // Above 24 Lakhs - 30%
 ];
 
 
@@ -215,12 +239,8 @@ function calculateTax() {
 
   const std_input = parseFloat(document.getElementById('std_deduction').value) || 0;
   const tds_input = parseFloat(document.getElementById('tds_deducted').value) || 0;
-    
-    // NEW INPUTS
-    // const filingDate = document.getElementById('filing_date').value; // Currently unused in calculation
-    // const advanceTax = parseFloat(document.getElementById('advance_tax').value) || 0; // Currently unused in calculation
 
-  // Pro-rated calculation
+  // Pro-rated gross and deductions (Using ₹75,000 standard deduction as per your inputs)
   const proratedGross = Math.round((salary + other_income) * prorateFactor);
   const proratedStdDeduction = Math.min(std_input, MAX_STD_DEDUCTION_ANNUAL * (months_worked === 12 ? 1 : prorateFactor));
   const taxableIncome = Math.max(0, proratedGross - proratedStdDeduction); 
@@ -228,18 +248,24 @@ function calculateTax() {
   // Progressive tax calculation
   let { tax: baseTax, details } = calculateProgressiveTax(taxableIncome); 
 
-  // Apply enhanced 87A rebate & Marginal Relief (THE FIX)
+  // Apply enhanced 87A rebate & Marginal Relief
   let taxAfterRebate = baseTax;
   let rebateAmount = 0;
   
   if (taxableIncome <= REBATE_LIMIT) {
+      // Standard Rebate
       rebateAmount = Math.min(baseTax, MAX_REBATE); 
       taxAfterRebate = baseTax - rebateAmount;
   } 
   else {
+      // Marginal Relief Logic for Rebate 
+      // Note: This is an interpretation of the marginal relief for the rebate system.
+      // If the tax on the income above the limit is less than the tax on the limit,
+      // the tax after rebate should not exceed the difference between the income and the limit.
       const netTaxLimit = taxableIncome - REBATE_LIMIT; 
       
       if (baseTax > netTaxLimit) {
+          // Marginal Relief applied (Tax after rebate is limited to the excess income)
           rebateAmount = baseTax - netTaxLimit; 
           taxAfterRebate = netTaxLimit; 
       } else {
@@ -248,14 +274,14 @@ function calculateTax() {
   }
 
 
-  // Surcharge 
+  // Surcharge & Marginal Relief (Applied on tax *after* rebate)
   const totalIncome = proratedGross; 
   const surchargeResult = applySurchargeAndMarginalRelief(taxAfterRebate, totalIncome);
 
-  // Cess
+  // After applying surcharge/marginal relief, add cess
   const taxBeforeCess = surchargeResult.taxAfterSurchargeBeforeCess; 
   const cessAmount = Math.round(taxBeforeCess * CESS_RATE); 
-  const totalTaxPayable = Math.round(taxBeforeCess + cessAmount); // Final Tax on Income (₹26,000)
+  const totalTaxPayable = Math.round(taxBeforeCess + cessAmount); 
 
   // Net payable/refund
   const proratedTDS = tds_input * prorateFactor;
@@ -264,12 +290,14 @@ function calculateTax() {
   // Build results object
   const results = {
     gross_income: proratedGross,
+    proratedStdDeduction,
     taxable_income: taxableIncome,
     base_tax: baseTax, 
     rebateAmount,
     taxAfterRebate,
     surchargeRate: surchargeResult.surchargeRate,
     surchargeAmount: surchargeResult.surchargeAmount,
+    marginalRelief: surchargeResult.marginalRelief,
     cess: cessAmount,
     totalPayable: totalTaxPayable, 
     tds_deducted: proratedTDS,
@@ -290,9 +318,19 @@ function updateUI(results, slabDetails) {
 
   // status
   const ns = document.getElementById('netStatus');
-  if (results.netPayableOrRefund > 1) ns.textContent = 'Net Tax Payable';
-  else if (results.netPayableOrRefund < -1) ns.textContent = 'Net Refund Due';
-  else ns.textContent = 'Zero Payable / Settled';
+  ns.classList.remove('text-blue-600', 'text-green-600', 'text-red-600'); // Clean up classes
+  if (results.netPayableOrRefund > 1) {
+    ns.textContent = 'Net Tax Payable';
+    ns.classList.add('text-red-600');
+  }
+  else if (results.netPayableOrRefund < -1) {
+    ns.textContent = 'Net Refund Due';
+    ns.classList.add('text-green-600');
+  }
+  else {
+    ns.textContent = 'Zero Payable / Settled';
+    ns.classList.add('text-blue-600');
+  }
 
   // surcharge & cess & rebate details
   document.getElementById('detailBaseTax').textContent = formatCurrency(Math.round(results.base_tax));
@@ -303,10 +341,16 @@ function updateUI(results, slabDetails) {
   document.getElementById('detailCess').textContent = formatCurrency(Math.round(results.cess));
   
   // Rebate detail update
-  let rebateStatus = 'No';
+  let rebateStatus = 'Not Applicable';
+  const detailRebateElement = document.getElementById('detailRebate');
+  detailRebateElement.classList.remove('text-green-700', 'text-red-700', 'text-gray-700');
+
   if (results.rebateAmount > 0) {
       const type = results.taxable_income > REBATE_LIMIT ? 'Marginal Relief' : 'Standard';
       rebateStatus = `₹ ${new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(Math.round(results.rebateAmount))} (Sec 87A - ${type})`;
+      detailRebateElement.classList.add('text-green-700');
+  } else {
+      detailRebateElement.classList.add('text-gray-700');
   }
   document.getElementById('detailRebate').textContent = rebateStatus;
 
@@ -316,11 +360,14 @@ function updateUI(results, slabDetails) {
   slabDetails.forEach(s => {
     const rangeTo = s.rangeTo === Infinity ? 'Above' : formatCurrency(Math.round(s.rangeTo));
     const row = document.createElement('tr');
+    // Highlight the row if the tax amount is greater than zero
+    const rowClass = s.tax > 0 ? 'bg-white hover:bg-gray-50' : 'bg-white text-gray-400';
+    row.className = rowClass;
     row.innerHTML = `
-      <td class="p-2">${formatCurrency(Math.round(s.rangeFrom))} – ${rangeTo}</td>
-      <td class="p-2 text-center">${(s.rate * 100).toFixed(0)}%</td>
-      <td class="p-2 text-right">${formatCurrency(Math.round(s.amt))}</td>
-      <td class="p-2 text-right font-semibold">${formatCurrency(Math.round(s.tax))}</td>
+      <td class="p-3 font-semibold">${formatCurrency(Math.round(s.rangeFrom))} – ${rangeTo}</td>
+      <td class="p-3 text-center">${(s.rate * 100).toFixed(0)}%</td>
+      <td class="p-3 text-right">${formatCurrency(Math.round(s.amt))}</td>
+      <td class="p-3 text-right font-bold">${formatCurrency(Math.round(s.tax))}</td>
     `;
     tbody.appendChild(row);
   });
